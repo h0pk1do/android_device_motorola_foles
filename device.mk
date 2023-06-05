@@ -91,3 +91,48 @@ PRODUCT_PACKAGES += \
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH)
+    
+PRODUCT_PACKAGES += \
+    LineageActions
+    
+# Optimize
+PRODUCT_ALWAYS_PREOPT_EXTRACTED_APK := true
+PRODUCT_MINIMIZE_JAVA_DEBUG_INFO := true
+PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD := false
+PRODUCT_DEX_PREOPT_DEFAULT_COMPILER_FILTER := everything
+
+# Vibrator HAL
+PRODUCT_PACKAGES += \
+    android.hardware.vibrator-service.bramble
+
+# DRV2624 Haptics Waveform
+PRODUCT_COPY_FILES += \
+    device/google/bramble/vibrator/drv2624/drv2624.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/drv2624.bin
+    
+# Google Camera
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/privapp-permissions-com.google.android.GoogleCamera.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-com.google.android.GoogleCamera.xml \
+
+# GPS
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/gps/apdr.conf:$(TARGET_COPY_OUT_VENDOR)/etc/apdr.conf \
+    $(LOCAL_PATH)/configs/gps/flp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/flp.conf \
+    $(LOCAL_PATH)/configs/gps/gps.conf:$(TARGET_COPY_OUT_VENDOR)/etc/gps.conf \
+    $(LOCAL_PATH)/configs/gps/izat.conf:$(TARGET_COPY_OUT_VENDOR)/etc/izat.conf \
+    $(LOCAL_PATH)/configs/gps/lowi.conf:$(TARGET_COPY_OUT_VENDOR)/etc/lowi.conf \
+    $(LOCAL_PATH)/configs/gps/sap.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sap.conf \
+    $(LOCAL_PATH)/configs/gps/xtwifi.conf:$(TARGET_COPY_OUT_VENDOR)/etc/xtwifi.conf    
+    
+
+# Vibrator HAL
+PRODUCT_PRODUCT_PROPERTIES +=\
+    ro.vendor.vibrator.hal.config.dynamic=1 \
+    ro.vendor.vibrator.hal.click.duration=7 \
+    ro.vendor.vibrator.hal.tick.duration=7 \
+    ro.vendor.vibrator.hal.heavyclick.duration=7 \
+    ro.vendor.vibrator.hal.short.voltage=161 \
+    ro.vendor.vibrator.hal.long.voltage=161 \
+    ro.vendor.vibrator.hal.long.frequency.shift=10 \
+    ro.vendor.vibrator.hal.steady.shape=1 \
+    ro.vendor.vibrator.hal.lptrigger=0
+        
